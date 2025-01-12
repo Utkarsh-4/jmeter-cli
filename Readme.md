@@ -14,24 +14,6 @@ The **JMeter CLI** is an automation tool designed to streamline the execution of
 
 ---
 
-## Directory Structure
-
-Here’s the organized structure of the JMeter CLI:
-
-```
-.
-├── config.json                  # Configuration file for script paths and settings
-├── datafiles/                   # Directory containing input CSV files for JMeter scripts
-├── jmeter-scripts/              # Directory containing JMeter (.jmx) scripts
-├── output_files/                # Directory for storing test output (CSV/HTML)
-│   ├── CSV Output/
-│   ├── HTML Output/
-├── run.mjs                      # Main CLI script for automation
-├── docs/                        # Learning and reference materials for JMeter
-```
-
----
-
 ## Installation
 
 Install the CLI globally via [npm](https://www.npmjs.com/) to make it available as a command-line tool:
