@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Client Account IMA" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">${__P(loopCount,1)}</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(numUsers,1)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(rampUpPeriod,1)}</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">${__P(lineCount)}</stringProp>
+        </LoopController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="delimiter">,</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="filename">${__P(csvFilePath)}</stringProp>
+            <boolProp name="ignoreFirstLine">true</boolProp>
+            <boolProp name="quotedData">false</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="variableNames">GLOBAL_CLIENT_ID,MAPIN_CODE,BASE_CURRENCY,INDEXATION,ACCT_TYPE,SUB_AC_TYPE,TAX_STATUS,TRANSACTION_CHARGES,MANAGER_CODE,BRANCH_CODE,ACC_OFFICER,AGENT_CODE,ACTIVE,BENCHMARK,BENCHMARK2,BENCHMARK3,REMARKS,HOLDER_TYPE,SECOND_CONDITION,SECOND_APPLICANT,THIRD_CONDITION,THIRD_APPLICANT,FOURTH_CONDITION,FOURTH_APPLICANT,FIFTH_CONDITION,FIFTH_APPLICANT,RISK_PROFILE,RISK_PROFILE_DATE,IMA_CONT_NO,WAIVER_OF_SUIT,PROF_PER_WAIVER,PURP_OF_ACCNT_OPEN,INVST_HORI,INVST_OBJ,PFRS_9_BUS_MODEL,INT_CONTRIB,ESCROW_ACCNT_EXP_DATE,TBG_REF,RC_DIVISION,REF_BY_BRANCH,REF_UNIT_IDD,REF_UNIT_PB,MODEL_PORTFOLIO_PROFILE,BOND_TRUST_SECURITY,HTC,FVTPL,FVOCI,NAV_DECIMAL,FINANCIAL_YEAR,WAIVER_EXPIRY,COMPUTE_NAV,FUND_MANAGER,ASSET_CLASS_NAME,COSTING_TYPE,REVAL_POLICY,CAPITALIZED,BANKACID,TRANSACTION_RULE,ASSET_CLASS_CODE,PRIMARYAC_FLAG,FEE_ID,CLIENT_NAME,CONDITION,ADD_APPLICANTS,BANKACID,ASSET_CLASS_NAME,CUSTNAME,ACCOUNT_NAME</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${__P(server_ip)}</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path"></stringProp>
+            <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </ConfigTestElement>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&quot;data&quot;:{&quot;client_accountdata&quot;:{&quot;BRANCH_CODE&quot;:&quot;${BRANCH_CODE}&quot;,&quot;SUB_AC_TYPE&quot;:&quot;${SUB_AC_TYPE}&quot;,&quot;MAPIN_CODE&quot;:&quot;${MAPIN_CODE}&quot;,&quot;PMS_ACID&quot;:&quot;&quot;,&quot;PMS_ACNO&quot;:&quot;&quot;,&quot;CLIENT_ID&quot;:&quot;${GLOBAL_CLIENT_ID}&quot;,&quot;INDEXATION&quot;:&quot;${INDEXATION}&quot;,&quot;ACCT_TYPE&quot;:&quot;${ACCT_TYPE}&quot;,&quot;TAX_STATUS&quot;:&quot;${TAX_STATUS}&quot;,&quot;TRANSACTION_CHARGES&quot;:&quot;${TRANSACTION_CHARGES}&quot;,&quot;MANAGER_CODE&quot;:&quot;${MANAGER_CODE}&quot;,&quot;ACC_OFFICER&quot;:&quot;${ACC_OFFICER}&quot;,&quot;AGENT_CODE&quot;:&quot;${AGENT_CODE}&quot;,&quot;ACTIVE&quot;:&quot;${ACTIVE}&quot;,&quot;ALLOC_TYPE&quot;:&quot;&quot;,&quot;DEF_BANKAC&quot;:&quot;&quot;,&quot;DEF_DEMAT&quot;:&quot;&quot;,&quot;REMARKS&quot;:&quot;${REMARKS}&quot;,&quot;HOLDER_TYPE&quot;:&quot;1&quot;,&quot;SECOND_CONDITION&quot;:&quot;${SECOND_CONDITION}&quot;,&quot;SECOND_APPLICANT&quot;:&quot;${SECOND_APPLICANT}&quot;,&quot;THIRD_CONDITION&quot;:&quot;${THIRD_CONDITION}&quot;,&quot;THIRD_APPLICANT&quot;:&quot;${THIRD_APPLICANT}&quot;,&quot;FOURTH_CONDITION&quot;:&quot;${FOURTH_CONDITION}&quot;,&quot;FOURTH_APPLICANT&quot;:&quot;${FOURTH_APPLICANT}&quot;,&quot;FIFTH_CONDITION&quot;:&quot;${FIFTH_CONDITION}&quot;,&quot;FIFTH_APPLICANT&quot;:&quot;${FIFTH_APPLICANT}&quot;,&quot;BASE_CURRENCY&quot;:&quot;${BASE_CURRENCY}&quot;,&quot;APPLICANTS&quot;:&quot;&quot;,&quot;BENCHMARK&quot;:&quot;${BENCHMARK}&quot;,&quot;BENCHMARK2&quot;:&quot;${BENCHMARK2}&quot;,&quot;BENCHMARK3&quot;:&quot;${BENCHMARK3}&quot;},&quot;applicantdata&quot;:[],&quot;feedata&quot;:[],&quot;assetconfigdata&quot;:[],&quot;bankacc&quot;:[],&quot;casaacc&quot;:[],&quot;custodianacc&quot;:[]},&quot;_custparams&quot;:{&quot;MODEL_PORTFOLIO_PROFILE&quot;:&quot;${MODEL_PORTFOLIO_PROFILE}&quot;,&quot;INT_CONTRIB&quot;:&quot;${INT_CONTRIB}&quot;,&quot;PFRS_9_BUS_MODEL&quot;:&quot;${PFRS_9_BUS_MODEL}&quot;,&quot;REF_BY_BRANCH&quot;:&quot;${REF_BY_BRANCH}&quot;,&quot;PROF_PER_WAIVER&quot;:&quot;${PROF_PER_WAIVER}&quot;,&quot;BOND_TRUST_SECURITY&quot;:&quot;${BOND_TRUST_SECURITY}&quot;,&quot;WAIVER_OF_SUIT&quot;:&quot;${WAIVER_OF_SUIT}&quot;,&quot;INVST_HORI&quot;:&quot;${INVST_HORI}&quot;,&quot;ESCROW_ACCNT_EXP_DATE&quot;:&quot;${ESCROW_ACCNT_EXP_DATE}&quot;,&quot;REF_UNIT_IDD&quot;:&quot;${REF_UNIT_IDD}&quot;,&quot;WAIVER_EXPIRY&quot;:&quot;${WAIVER_EXPIRY}&quot;,&quot;FINANCIAL_YEAR&quot;:&quot;${FINANCIAL_YEAR}&quot;,&quot;TF_RECIPIENT_NAME&quot;:&quot;&quot;,&quot;SECONDARY_CONTACT_NO&quot;:&quot;&quot;,&quot;EMAIL&quot;:&quot;&quot;,&quot;TF_BASIS&quot;:&quot;&quot;,&quot;FS_FREQUENCY_DATA&quot;:&quot;&quot;,&quot;IMA_CONT_NO&quot;:&quot;${IMA_CONT_NO}&quot;,&quot;PURP_OF_ACCNT_OPEN&quot;:&quot;${PURP_OF_ACCNT_OPEN}&quot;,&quot;INVST_OBJ&quot;:&quot;${INVST_OBJ}&quot;,&quot;TBG_REF&quot;:&quot;${TBG_REF}&quot;,&quot;REF_UNIT_PB&quot;:&quot;${REF_UNIT_PB}&quot;,&quot;COMPUTE_NAV&quot;:&quot;${COMPUTE_NAV}&quot;,&quot;COMMUNICATION_ADDRESS&quot;:&quot;&quot;,&quot;NAV_DECIMAL&quot;:&quot;${NAV_DECIMAL}&quot;,&quot;PRIMARY_CONTACT_NO&quot;:&quot;&quot;,&quot;FUND_MANAGER&quot;:&quot;${FUND_MANAGER}&quot;,&quot;HTC&quot;:&quot;${HTC}&quot;,&quot;MAILING_INSTRUCTIONS&quot;:&quot;&quot;,&quot;FVOCI&quot;:&quot;${FVOCI}&quot;,&quot;FVTPL&quot;:&quot;${FVTPL}&quot;,&quot;RC_DIVISION&quot;:&quot;${RC_DIVISION}&quot;,&quot;TAX_STATUS_ACCT&quot;:&quot;&quot;,&quot;ADDRESS&quot;:&quot;&quot;,&quot;CONTACT_DETAILS&quot;:&quot;${CONTACT_DETAILS}&quot;,&quot;TF_COMP_TYPE&quot;:&quot;&quot;},&quot;_ignore_prc_con&quot;:&quot;n&quot;}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${__P(server_ip)}</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/NREST/client_accounts/create</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="Host" elementType="Header">
+                  <stringProp name="Header.name">Host</stringProp>
+                  <stringProp name="Header.value">${__P(server_ip)}</stringProp>
+                </elementProp>
+                <elementProp name="User-Agent" elementType="Header">
+                  <stringProp name="Header.name">User-Agent</stringProp>
+                  <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0</stringProp>
+                </elementProp>
+                <elementProp name="Accept" elementType="Header">
+                  <stringProp name="Header.name">Accept</stringProp>
+                  <stringProp name="Header.value">*/*</stringProp>
+                </elementProp>
+                <elementProp name="Accept-Language" elementType="Header">
+                  <stringProp name="Header.name">Accept-Language</stringProp>
+                  <stringProp name="Header.value">en-US,en;q=0.5</stringProp>
+                </elementProp>
+                <elementProp name="Accept-Encoding" elementType="Header">
+                  <stringProp name="Header.name">Accept-Encoding</stringProp>
+                  <stringProp name="Header.value">gzip, deflate, br</stringProp>
+                </elementProp>
+                <elementProp name="Referer" elementType="Header">
+                  <stringProp name="Header.name">Referer</stringProp>
+                  <stringProp name="Header.value"></stringProp>
+                </elementProp>
+                <elementProp name="Content-Type" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+                <elementProp name="sessionid" elementType="Header">
+                  <stringProp name="Header.name">sessionid</stringProp>
+                  <stringProp name="Header.value">wealthonline</stringProp>
+                </elementProp>
+                <elementProp name="Content-Length" elementType="Header">
+                  <stringProp name="Header.name">Content-Length</stringProp>
+                  <stringProp name="Header.value">1601</stringProp>
+                </elementProp>
+                <elementProp name="Origin" elementType="Header">
+                  <stringProp name="Header.name">Origin</stringProp>
+                  <stringProp name="Header.value"></stringProp>
+                </elementProp>
+                <elementProp name="Connection" elementType="Header">
+                  <stringProp name="Header.name">Connection</stringProp>
+                  <stringProp name="Header.value">keep-alive</stringProp>
+                </elementProp>
+                <elementProp name="Cookie" elementType="Header">
+                  <stringProp name="Header.name">Cookie</stringProp>
+                  <stringProp name="Header.value">io=1Ro51w6P_yYGrtPNAAKD</stringProp>
+                </elementProp>
+                <elementProp name="Sec-Fetch-Dest" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
+                  <stringProp name="Header.value">empty</stringProp>
+                </elementProp>
+                <elementProp name="Sec-Fetch-Mode" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
+                  <stringProp name="Header.value">cors</stringProp>
+                </elementProp>
+                <elementProp name="Sec-Fetch-Site" elementType="Header">
+                  <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
+                  <stringProp name="Header.value">same-origin</stringProp>
+                </elementProp>
+                <elementProp name="TE" elementType="Header">
+                  <stringProp name="Header.name">TE</stringProp>
+                  <stringProp name="Header.value">trailers</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

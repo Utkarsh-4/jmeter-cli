@@ -1,0 +1,95 @@
+{
+  "server_ip":"<your_server_ip>",
+  "scripts": [
+    {
+      "name": "Client",
+      "scriptPath": "jmeter_scripts/client.jmx",
+      "csvFileName": "client.csv"
+    },
+    {
+      "name": "Client Account",
+      "scriptPath": "jmeter_scripts/clientaccount.jmx",
+      "csvFileName": "clientaccount.csv"
+    },
+    {
+      "name": "Cash in Cash out",
+      "scriptPath": "jmeter_scripts/cashincashout.jmx",
+      "csvFileName": "cashincashout.csv"
+    },
+    {
+      "name": "Corporate Events",
+      "subScripts": [
+        {
+          "name": "Equity Rights",
+          "scriptPath": "jmeter_scripts/corporate_events/equity_rights.jmx",
+          "csvFileName": "corporate_events/equity_rights.csv"
+        },
+        {
+          "name": "Equity Bonus Dividend",
+          "scriptPath": "jmeter_scripts/corporate_events/equity_bonus_dividend.jmx",
+          "csvFileName": "corporate_events/equity_bonus_dividend.csv"
+        },
+        {
+          "name": "Mutual Funds",
+          "scriptPath": "jmeter_scripts/corporate_events/mutual_funds.jmx",
+          "csvFileName": "corporate_events/mutual_funds.csv"
+        }
+      ]
+    },
+    {
+      "name": "Upload trades",
+      "subScripts": [
+        {
+          "name": "Mutual Funds",
+          "scriptPath": "jmeter_scripts/upload_trades/mutual_funds_upload.jmx",
+          "csvFileName": "upload_trades/mutual_funds_upload.csv"
+        },
+        {
+          "name": "Equity",
+          "scriptPath": "jmeter_scripts/upload_trades/equity_trades.jmx",
+          "csvFileName": "upload_trades/equity_trades.csv"
+        },
+        {
+          "name": "FD",
+          "scriptPath": "jmeter_scripts/upload_trades/fd_trades.jmx",
+          "csvFileName": "upload_trades/fd_trades.csv"
+        },
+        {
+          "name": "FIS",
+          "scriptPath": "jmeter_scripts/upload_trades/fis_trades.jmx",
+          "csvFileName": "upload_trades/fis_trades.csv"
+        }
+      ]
+    },
+    {
+      "name": "Securities",
+      "subScripts": [
+        {
+          "name": "Equity",
+          "scriptPath": "jmeter_scripts/securities/equity_securities.jmx",
+          "csvFileName": "securities/equity_securities.csv"
+        },
+        {
+          "name": "FIS",
+          "scriptPath": "jmeter_scripts/securities/fis_securities.jmx",
+          "csvFileName": "securities/fis_securities.csv"
+        },
+        {
+          "name": "Mutual Funds",
+          "scriptPath": "jmeter_scripts/securities/mf_securities.jmx",
+          "csvFileName": "securities/mf_securities.csv"
+        }
+      ]
+    },
+    {
+      "name": "Position Screen Loading",
+      "scriptPath": "jmeter_scripts/position_screen_loading.jmx",
+      "csvFileName": ""
+    },
+    {
+      "name": "Bank Account",
+      "scriptPath": "jmeter_scripts/bank_account.jmx",
+      "csvFileName": "bankaccount.csv"
+    }
+  ]
+}
